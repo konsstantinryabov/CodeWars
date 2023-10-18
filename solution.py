@@ -1,50 +1,37 @@
 # Решения в работе
-# KATA 5 - Rotate an array matrix
+# KATA 5 - Penalty for speeding
 
-def rotate(matrix, direction):
-    """
-    Функция переворачивает матрицу на 90
-    градусов либо по - 'clockwise',
-    либо против часовой - 'counter-clockwise'
-    - matrix - матрица списков
-    - direction - угол
-    """
-    D = []
-    if direction == 'clockwise':
-        G = list(reversed(matrix))
-        for i in range(len(matrix[0])):
-            D.append([spisok[i] for spisok in G if i < len(spisok)])
-        return list(filter(None, D))
-
-    elif direction == 'counter-clockwise':
-        for i in range(len(matrix[0])):
-            D.append([spisok[i] for spisok in matrix if i < len(spisok)])
-        return list(reversed(list(filter(None, D))))
-
-print(rotate([[17, 6, -2, -4, -3],
-              [6, 4, -15, 14, -11],
-              [-12, 16, -1, -18, 3],
-              [-18, 17, -16, -19, 8],
-              [-9, -4, 16, -13, -13]], 'counter-clockwise'))
-
-print(rotate([[17, 6, -2, -4, -3],
-              [6, 4, -15, 14, -11]], 'clockwise'))
+import itertools
+from functools import reduce
 
 
-print(rotate([[1, 2, 3],
-              [4, 5, 6],
-              [7, 8, 9]], 'counter-clockwise'))
+'''
+def penalty(numbers):
 
-print(rotate([[1, 2, 3],
-              [4, 5, 6],
-              [7, 8, 9]], 'clockwise'))
+    per = list(itertools.permutations(numbers))
+    D = [int(reduce((lambda x, y: x + y), (p))) for p in per]
+    return str(min(D))
+'''
 
-print(rotate([[1, 2, 3],
-              [4, 5, 6],
-              [7, 8, 9],
-              [10, 11, 12]], 'counter-clockwise'))
+'''
+def penalty(numbers):
+    F = []
 
-print(rotate([[1, 2, 3],
-              [4, 5, 6],
-              [7, 8, 9],
-              [10, 11, 12]], 'clockwise'))
+    for i in itertools.permutations(numbers):
+        D = int(''.join([j for j in i]))
+        F.append(D)
+    return str(min(F))
+'''
+
+
+def penalty(numbers):
+    F = []
+
+    for i in itertools.permutations(numbers):
+        D = int(''.join([j for j in i]))
+        F.append(D)
+    return str(min(F))
+
+
+print(penalty(['100', '10', '1']))          # '100101'
+print(penalty(['45', '30', '50', '1']))     # '1304550'
